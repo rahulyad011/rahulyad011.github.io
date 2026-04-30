@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="18" fill="#10141a"/>
+  <!-- Parent agent -->
+  <rect x="60" y="22" width="60" height="36" rx="8" fill="#1772d0" opacity="0.9"/>
+  <text x="90" y="36" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">SPAWNER</text>
+  <text x="90" y="50" font-family="monospace" font-size="9" fill="#f09228" text-anchor="middle">⚡</text>
+  <!-- Spawn lines -->
+  <g stroke="#f09228" stroke-width="1.5" opacity="0.8" stroke-dasharray="3 2">
+    <line x1="90" y1="58" x2="40" y2="100"/>
+    <line x1="90" y1="58" x2="90" y2="100"/>
+    <line x1="90" y1="58" x2="140" y2="100"/>
+  </g>
+  <!-- Spawned child agents -->
+  <rect x="16" y="100" width="48" height="30" rx="6" fill="#1772d0" opacity="0.6"/>
+  <text x="40" y="119" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">Agent-1</text>
+  <rect x="66" y="100" width="48" height="30" rx="6" fill="#1772d0" opacity="0.6"/>
+  <text x="90" y="119" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">Agent-2</text>
+  <rect x="116" y="100" width="48" height="30" rx="6" fill="#1772d0" opacity="0.6"/>
+  <text x="140" y="119" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">Agent-N</text>
+  <!-- Result arrows back up -->
+  <g stroke="#1772d0" stroke-width="1" opacity="0.4">
+    <line x1="40" y1="130" x2="40" y2="148"/>
+    <line x1="90" y1="130" x2="90" y2="148"/>
+    <line x1="140" y1="130" x2="140" y2="148"/>
+    <line x1="40" y1="148" x2="140" y2="148"/>
+    <line x1="90" y1="148" x2="90" y2="158"/>
+  </g>
+  <circle cx="90" cy="158" r="5" fill="#f09228" opacity="0.8"/>
+</svg>

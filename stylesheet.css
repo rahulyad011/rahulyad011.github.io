@@ -81,28 +81,29 @@ tr,
 p,
 a {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 strong {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 heading {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
+  font-size: 26px;
 }
 
 papertitle {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700
 }
 
 name {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
+  font-size: 38px;
 }
 
 .one {
@@ -128,4 +129,58 @@ name {
 
 span.highlight {
   background-color: #ffffd0;
+}
+
+/* Section headings — collapsible buttons */
+button.collapsible {
+  width: 100%;
+  text-align: left;
+  padding: 8px 0;
+  transition: opacity .15s ease;
+}
+
+button.collapsible:hover {
+  opacity: 0.75;
+}
+
+button.collapsible heading {
+  position: relative;
+  padding-left: 14px;
+}
+
+button.collapsible heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 22px;
+  background: #1772d0;
+  border-radius: 2px;
+}
+
+/* Project & experience row hover */
+table tr {
+  transition: background-color .15s ease;
+}
+
+table tr:hover {
+  background-color: rgba(23, 114, 208, 0.03);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print-friendly */
+@media print {
+  button.collapsible heading::before { display: none; }
+  .collapse { display: block !important; height: auto !important; }
+}
+
+/* Responsive — outcomes strip on small screens */
+@media (max-width: 640px) {
+  body { font-size: 13px; }
 }

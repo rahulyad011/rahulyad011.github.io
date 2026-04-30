@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="18" fill="#10141a"/>
+  <!-- Code document -->
+  <rect x="30" y="25" width="80" height="100" rx="6" fill="#1a2035" stroke="#1772d0" stroke-width="1.5"/>
+  <!-- Folded corner -->
+  <polyline points="90,25 110,25 110,45 90,45 90,25" fill="#10141a" stroke="#1772d0" stroke-width="1"/>
+  <!-- Code lines -->
+  <g fill="#1772d0" opacity="0.7">
+    <rect x="40" y="55" width="50" height="4" rx="2"/>
+    <rect x="40" y="65" width="38" height="4" rx="2"/>
+    <rect x="40" y="75" width="45" height="4" rx="2"/>
+    <rect x="40" y="85" width="30" height="4" rx="2"/>
+    <rect x="40" y="95" width="42" height="4" rx="2"/>
+    <rect x="40" y="105" width="35" height="4" rx="2"/>
+  </g>
+  <!-- Severity badges on right side -->
+  <rect x="118" y="55" width="38" height="14" rx="4" fill="#e05252" opacity="0.85"/>
+  <text x="137" y="66" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">HIGH</text>
+  <rect x="118" y="78" width="38" height="14" rx="4" fill="#f09228" opacity="0.85"/>
+  <text x="137" y="89" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">MED</text>
+  <rect x="118" y="101" width="38" height="14" rx="4" fill="#1772d0" opacity="0.85"/>
+  <text x="137" y="112" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle">LOW</text>
+  <!-- Connector dots -->
+  <line x1="110" y1="62" x2="118" y2="62" stroke="#e05252" stroke-width="1" opacity="0.6"/>
+  <line x1="110" y1="85" x2="118" y2="85" stroke="#f09228" stroke-width="1" opacity="0.6"/>
+  <line x1="110" y1="108" x2="118" y2="108" stroke="#1772d0" stroke-width="1" opacity="0.6"/>
+  <!-- Checkmark at bottom -->
+  <circle cx="70" cy="148" r="14" fill="none" stroke="#1772d0" stroke-width="1.5" opacity="0.6"/>
+  <polyline points="62,148 68,155 80,140" stroke="#f09228" stroke-width="2" fill="none"/>
+</svg>
