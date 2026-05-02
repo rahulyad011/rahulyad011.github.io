@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+  <!-- Background -->
+  <rect width="200" height="160" fill="#f8fafc" rx="10"/>
+
+  <!-- Doc icon -->
+  <rect x="10" y="44" width="36" height="46" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.5"/>
+  <line x1="18" y1="58" x2="38" y2="58" stroke="#1772d0" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="18" y1="66" x2="38" y2="66" stroke="#1772d0" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="18" y1="74" x2="30" y2="74" stroke="#1772d0" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Doc fold corner -->
+  <polyline points="36,44 36,52 44,52" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+
+  <!-- Arrow doc → search -->
+  <line x1="47" y1="67" x2="60" y2="67" stroke="#1772d0" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="60,63 68,67 60,71" fill="#1772d0"/>
+
+  <!-- Search / retrieval circle -->
+  <circle cx="84" cy="67" r="16" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.5"/>
+  <circle cx="81" cy="64" r="6" fill="none" stroke="#1772d0" stroke-width="1.5"/>
+  <line x1="85" y1="69" x2="91" y2="75" stroke="#1772d0" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Arrow search → LLM -->
+  <line x1="100" y1="67" x2="113" y2="67" stroke="#1772d0" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="113,63 121,67 113,71" fill="#1772d0"/>
+
+  <!-- LLM box -->
+  <rect x="122" y="51" width="42" height="32" rx="5" fill="#1772d0"/>
+  <text x="143" y="62" text-anchor="middle" font-family="Lato, sans-serif" font-size="7" font-weight="700" fill="white">LLM</text>
+  <line x1="130" y1="68" x2="156" y2="68" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+  <line x1="130" y1="73" x2="150" y2="73" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Arrow LLM → output -->
+  <line x1="164" y1="67" x2="174" y2="67" stroke="#1772d0" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="174,63 182,67 174,71" fill="#1772d0"/>
+
+  <!-- Output checkmark bubble -->
+  <circle cx="190" cy="67" r="10" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.5"/>
+  <polyline points="185,67 188,71 195,62" fill="none" stroke="#1772d0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Labels -->
+  <text x="28" y="100" text-anchor="middle" font-family="Lato, sans-serif" font-size="8" fill="#555">Docs</text>
+  <text x="84" y="100" text-anchor="middle" font-family="Lato, sans-serif" font-size="8" fill="#555">Retrieve</text>
+  <text x="143" y="100" text-anchor="middle" font-family="Lato, sans-serif" font-size="8" fill="#555">Generate</text>
+  <text x="190" y="100" text-anchor="middle" font-family="Lato, sans-serif" font-size="8" fill="#555">Answer</text>
+
+  <!-- Title text -->
+  <text x="100" y="125" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" font-weight="700" fill="#1772d0">RAG</text>
+  <text x="100" y="138" text-anchor="middle" font-family="Lato, sans-serif" font-size="8" fill="#888">POC → Production</text>
+</svg>

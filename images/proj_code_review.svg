@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <rect width="180" height="180" rx="18" fill="#10141a"/>
+  <rect width="180" height="180" rx="18" fill="#f8fafc"/>
   <!-- Code document -->
-  <rect x="30" y="25" width="80" height="100" rx="6" fill="#1a2035" stroke="#1772d0" stroke-width="1.5"/>
+  <rect x="30" y="25" width="80" height="100" rx="6" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.5"/>
   <!-- Folded corner -->
-  <polyline points="90,25 110,25 110,45 90,45 90,25" fill="#10141a" stroke="#1772d0" stroke-width="1"/>
+  <polyline points="90,25 110,25 110,45 90,45 90,25" fill="#f8fafc" stroke="#1772d0" stroke-width="1"/>
   <!-- Code lines -->
   <g fill="#1772d0" opacity="0.7">
     <rect x="40" y="55" width="50" height="4" rx="2"/>

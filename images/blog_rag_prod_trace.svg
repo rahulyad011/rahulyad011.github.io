@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280">
+  <rect width="760" height="280" fill="#f8fafc"/>
+
+  <!-- Trace header -->
+  <text x="20" y="32" font-family="Lato, sans-serif" font-size="11" font-weight="700" fill="#888" letter-spacing="1.5">REQUEST TRACE</text>
+  <text x="740" y="32" text-anchor="end" font-family="Lato, sans-serif" font-size="10" fill="#888">total: 1.84s &middot; 4,210 tokens</text>
+  <line x1="20" y1="40" x2="740" y2="40" stroke="#1772d0" stroke-width="1" opacity="0.3"/>
+
+  <!-- Stage labels above bars -->
+  <text x="80" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">query</text>
+  <text x="180" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">rewrite</text>
+  <text x="290" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">retrieve</text>
+  <text x="400" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">rerank</text>
+  <text x="500" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">prompt</text>
+  <text x="600" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">LLM</text>
+  <text x="700" y="76" text-anchor="middle" font-family="Lato, sans-serif" font-size="10" font-weight="700" fill="#1772d0">response</text>
+
+  <!-- Swim-lane bars (each stage proportional to time) -->
+  <!-- query -->
+  <rect x="40" y="86" width="80" height="36" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.2"/>
+  <!-- rewrite -->
+  <rect x="124" y="86" width="112" height="36" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.2"/>
+  <!-- retrieve -->
+  <rect x="240" y="86" width="100" height="36" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.2"/>
+  <!-- rerank -->
+  <rect x="344" y="86" width="112" height="36" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.2"/>
+  <!-- prompt -->
+  <rect x="460" y="86" width="80" height="36" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.2"/>
+  <!-- LLM (highlighted, dominant) -->
+  <rect x="544" y="86" width="120" height="36" rx="4" fill="#1772d0"/>
+  <!-- response -->
+  <rect x="668" y="86" width="72" height="36" rx="4" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.2"/>
+
+  <!-- Clock + latency badges below each stage -->
+  <!-- query -->
+  <circle cx="62" cy="142" r="5" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="62" y1="142" x2="62" y2="139" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="62" y1="142" x2="65" y2="142" stroke="#1772d0" stroke-width="1.2"/>
+  <text x="80" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#555">12ms</text>
+
+  <circle cx="160" cy="142" r="5" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="160" y1="142" x2="160" y2="139" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="160" y1="142" x2="163" y2="142" stroke="#1772d0" stroke-width="1.2"/>
+  <text x="180" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#555">240ms</text>
+
+  <circle cx="270" cy="142" r="5" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="270" y1="142" x2="270" y2="139" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="270" y1="142" x2="273" y2="142" stroke="#1772d0" stroke-width="1.2"/>
+  <text x="290" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#555">180ms</text>
+
+  <circle cx="380" cy="142" r="5" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="380" y1="142" x2="380" y2="139" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="380" y1="142" x2="383" y2="142" stroke="#1772d0" stroke-width="1.2"/>
+  <text x="400" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#555">220ms</text>
+
+  <circle cx="480" cy="142" r="5" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="480" y1="142" x2="480" y2="139" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="480" y1="142" x2="483" y2="142" stroke="#1772d0" stroke-width="1.2"/>
+  <text x="500" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#555">8ms</text>
+
+  <circle cx="580" cy="142" r="5" fill="none" stroke="#f09228" stroke-width="1.2"/>
+  <line x1="580" y1="142" x2="580" y2="139" stroke="#f09228" stroke-width="1.2"/>
+  <line x1="580" y1="142" x2="583" y2="142" stroke="#f09228" stroke-width="1.2"/>
+  <text x="600" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" font-weight="700" fill="#f09228">1180ms</text>
+
+  <circle cx="680" cy="142" r="5" fill="none" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="680" y1="142" x2="680" y2="139" stroke="#1772d0" stroke-width="1.2"/>
+  <line x1="680" y1="142" x2="683" y2="142" stroke="#1772d0" stroke-width="1.2"/>
+  <text x="700" y="146" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#555">4ms</text>
+
+  <!-- Token badges -->
+  <rect x="55" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#1772d0" stroke-width="1"/>
+  <text x="80" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#1772d0">12 tok</text>
+
+  <rect x="155" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#1772d0" stroke-width="1"/>
+  <text x="180" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#1772d0">28 tok</text>
+
+  <rect x="265" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#1772d0" stroke-width="1"/>
+  <text x="290" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#1772d0">2.1k tok</text>
+
+  <rect x="375" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#1772d0" stroke-width="1"/>
+  <text x="400" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#1772d0">580 tok</text>
+
+  <rect x="475" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#1772d0" stroke-width="1"/>
+  <text x="500" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#1772d0">820 tok</text>
+
+  <rect x="575" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#f09228" stroke-width="1"/>
+  <text x="600" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" font-weight="700" fill="#f09228">680 tok</text>
+
+  <rect x="675" y="158" width="50" height="16" rx="3" fill="#fff" stroke="#1772d0" stroke-width="1"/>
+  <text x="700" y="170" text-anchor="middle" font-family="Lato, sans-serif" font-size="9" fill="#1772d0">680 tok</text>
+
+  <!-- Bottom: legend -->
+  <line x1="20" y1="200" x2="740" y2="200" stroke="#1772d0" stroke-width="1" opacity="0.2"/>
+
+  <rect x="40" y="218" width="14" height="14" rx="2" fill="#1772d0"/>
+  <text x="62" y="230" font-family="Lato, sans-serif" font-size="11" fill="#555">LLM call (dominates latency &amp; cost)</text>
+
+  <rect x="290" y="218" width="14" height="14" rx="2" fill="#e8f0fb" stroke="#1772d0" stroke-width="1"/>
+  <text x="312" y="230" font-family="Lato, sans-serif" font-size="11" fill="#555">supporting stage</text>
+
+  <rect x="450" y="218" width="14" height="14" rx="2" fill="#fff" stroke="#f09228" stroke-width="1"/>
+  <text x="472" y="230" font-family="Lato, sans-serif" font-size="11" fill="#555">flagged: high latency &amp; tokens</text>
+
+  <text x="20" y="266" font-family="Lato, sans-serif" font-size="10" font-style="italic" fill="#888">every stage logged: query, prompt, scores, latency, tokens, cost</text>
+</svg>

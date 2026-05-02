@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <rect width="180" height="180" rx="18" fill="#10141a"/>
+  <rect width="180" height="180" rx="18" fill="#f8fafc"/>
   <!-- Input query -->
-  <rect x="18" y="76" width="40" height="28" rx="6" fill="#1a2035" stroke="#1772d0" stroke-width="1.5"/>
+  <rect x="18" y="76" width="40" height="28" rx="6" fill="#e8f0fb" stroke="#1772d0" stroke-width="1.5"/>
   <text x="38" y="87" font-family="monospace" font-size="7" fill="#1772d0" text-anchor="middle">query</text>
   <text x="38" y="98" font-family="monospace" font-size="9" fill="#f09228" text-anchor="middle">?</text>
   <!-- Router diamond -->

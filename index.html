@@ -131,7 +131,7 @@
                     <tr style="padding:0px">
                         <td style="padding:2.5%;width:63%;vertical-align:middle">
 
-                            <p>I design and ship production AI systems that bridge research and engineering. At <strong>Oracle</strong>, I currently lead the architecture of <strong>ConstructIQ&trade;</strong> , an 8-agent autonomous AI platform that unifies schedule data, contracts, live CCTV video, audio inspections, and IoT signals into a single intelligence engine for the construction industry. Over 8+ years, I've shipped 10+ enterprise-grade AI systems into production and built ML services processing millions of records daily , with <strong>5 granted USPTO patents and 4 pending applications</strong> alongside.</p>
+                            <p>I design and ship production AI systems that bridge research and engineering. At <strong>Oracle</strong>, I currently lead the architecture of <strong>ConstructIQ&trade;</strong> , an 8-agent autonomous AI platform that unifies schedule data, contracts, live CCTV video, and audio inspections into a single intelligence engine for the construction industry. Over 8+ years, I've shipped 10+ enterprise-grade AI systems into production and built ML services processing millions of records daily , with <strong>5 granted USPTO patents and 4 pending applications</strong> alongside.</p>
 
                             <p>I work end-to-end across the AI delivery lifecycle: product understanding and architecture, solution design, building and operating data pipelines, deploying ML and LLM services at scale, and driving client engagements through to delivery. I lead teams of engineers and ML practitioners while remaining hands-on in design, code, and research. My academic foundation is an MS in CS with AI specialization from <a href="https://www.buffalo.edu/" target="_blank">SUNY Buffalo</a> and a BTech in Electronics from <a href="https://iitbhu.ac.in/" target="_blank">IIT BHU Varanasi</a>.</p>
 
@@ -354,19 +354,19 @@
                                 <b>ConstructIQ&trade; , Multi-Agent AI Platform for Construction Intelligence</b> <span style="font-size: 11px; color: #f09228; font-weight: 600;">[FLAGSHIP]</span>
                                 <br>
                                 <span>&#8226;</span>
-                                Architected and led development of ConstructIQ&trade;, an 8-agent autonomous AI platform unifying 6 data modalities (Primavera P6 schedule, ERP/cost, contracts/BIM, live CCTV, audio inspections, IoT) into a single intelligence engine , currently in beta, planned for the August release as a SaaS module on Oracle Cloud
+                                Architected and led an 8-agent autonomous platform unifying 5 data modalities (P6 schedule, ERP/cost, contracts/BIM, CCTV, audio), shipping in <b>Oracle Construction Intelligence Cloud</b>
                                 <br>
                                 <span>&#8226;</span>
-                                Designed the multi-agent orchestration layer using <b>OpenAI Agents SDK</b>: NEXUS master orchestrator dispatches 7 specialist sub-agents (APEX-schedule, DELTA-documents, VANTAGE-vision, ATLAS-risk, ECHO-audio, HERALD-reporting, SHIELD-compliance) in parallel with shared knowledge graph memory
+                                Built the orchestration layer on <b>OpenAI Agents SDK</b>: NEXUS dispatches 7 specialist sub-agents (schedule, documents, vision, risk, audio, reporting, compliance) over a shared knowledge graph
                                 <br>
                                 <span>&#8226;</span>
-                                Built the vision pipeline (VANTAGE): YOLOv10 at 30fps on OCI GPU for real-time PPE/safety detection with <b>&lt;2s alert latency</b>; GPT-4o Vision for scene-level progress assessment correlated to P6 activities
+                                Vision pipeline: YOLOv10 at 30fps on OCI GPU with <b>&lt;2s safety alert latency</b>; GPT-4o Vision for scene-level progress correlated to P6 activities
                                 <br>
                                 <span>&#8226;</span>
-                                Engineered the streaming layer with Apache Kafka and Oracle Streaming, FastAPI microservices, Pydantic v2 typed I/O contracts, Oracle 23ai Vector Database (hybrid BM25 + vector retrieval), and Apache AGE on Postgres for the cross-domain knowledge graph
+                                Streaming/data stack: Kafka, FastAPI, Pydantic v2, Oracle 23ai Vector DB (hybrid BM25 + vector), Apache AGE on Postgres for the cross-domain knowledge graph
                                 <br>
                                 <span>&#8226;</span>
-                                Led cross-functional team across data engineering, ML, and platform; drove client POCs, architecture reviews, and roadmap planning. Targeting <b>15% reduction in schedule overrun</b>, <b>80% reduction in manual reporting time</b>, and significant LD liability to be avoided per client annually
+                                Targeting <b>15% less schedule overrun</b> and <b>80% less manual reporting time</b> per client; led cross-functional delivery across data, ML, and platform
                             </p>
                         </td>
                     </tr>
@@ -720,29 +720,6 @@
             <tr>
                 <td colspan="2" style="padding: 18px 20px 4px;">
                     <p style="margin:0; font-size:13px; font-weight:700; color:#1772d0; letter-spacing:0.04em; text-transform:uppercase; border-bottom:1px solid #e5e5e5; padding-bottom:6px;">Intelligent Agents &amp; RAG Systems</p>
-                </td>
-            </tr>
-
-            <tr>
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                    <div class="one">
-                        <img src='images/proj_llm_router.svg' width="180">
-                    </div>
-                </td>
-                <td style="padding:20px;width:75%;vertical-align:top">
-                    <papertitle><big>LLM Router , Query-to-Expert Dispatch</big></papertitle>
-                    <br>
-                    <p><em>Python, LangChain, OpenAI | 2024 &nbsp;<a href="https://github.com/rahulyad011/routing_LLMs" target="_blank">[code]</a></em></p>
-                    <p>
-                        <span>&#8226;</span>
-                        Agent that classifies an incoming query and routes it to the most appropriate specialist LLM or model configuration based on query type
-                        <br>
-                        <span>&#8226;</span>
-                        Routing logic uses a lightweight classifier + prompt-based intent detection; enables cost-efficient model selection (small vs. large LLM) per task
-                        <br>
-                        <span>&#8226;</span>
-                        Foundation pattern for production multi-model systems where different tasks warrant different model capabilities and cost profiles
-                    </p>
                 </td>
             </tr>
 
@@ -1115,23 +1092,45 @@
             <table border=0 class="bg_colour" style="padding:20px;width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
                 <tr>
                     <td style="padding: 10px;">
-                        <papertitle><big>Multi-Agent Systems in Production: Lessons from ConstructIQ&trade;</papertitle></big> <span style="font-size: 11px; color: #1772d0; font-weight: 600;">[COMING SOON]</span>
-                        <br>
-                        <span style="font-size: 13px; color: #555;">Internal Oracle engineering talk on building 8-agent autonomous platforms with OpenAI Agents SDK , orchestration patterns, evaluation strategies, cost &amp; latency tradeoffs in production.</span>
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <a href="blog/from-rag-poc-to-production.html" style="flex-shrink:0;">
+                                <img src="images/blog_rag_production.svg" alt="RAG pipeline" style="width:80px;">
+                            </a>
+                            <div>
+                                <papertitle><big><a href="blog/from-rag-poc-to-production.html">From RAG POC to Production: What Actually Changes</a></big></papertitle> <span style="font-size: 11px; color: #2e8b57; font-weight: 600;">[NEW]</span>
+                                <br>
+                                <span style="font-size: 13px; color: #555;">Blog post on the gap between a working RAG demo and a system that survives real users , retrieval quality, hallucination control, observability, and cost.</span>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding: 10px;">
-                        <papertitle><big>From RAG POC to Production: What Actually Changes</papertitle></big> <span style="font-size: 11px; color: #1772d0; font-weight: 600;">[COMING SOON]</span>
-                        <br>
-                        <span style="font-size: 13px; color: #555;">Blog post on the gap between a working RAG demo and a system that survives real users , retrieval quality, hallucination control, observability, and cost.</span>
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <img src="images/blog_rag_production.svg" alt="" style="width:80px; flex-shrink:0; filter: grayscale(60%); opacity:0.5;">
+                            <div>
+                                <papertitle><big>Multi-Agent Systems in Production: Lessons from ConstructIQ&trade;</big></papertitle> <span style="font-size: 11px; color: #1772d0; font-weight: 600;">[COMING SOON]</span>
+                                <br>
+                                <span style="font-size: 13px; color: #555;">Internal Oracle engineering talk on building 8-agent autonomous platforms with OpenAI Agents SDK , orchestration patterns, evaluation strategies, cost &amp; latency tradeoffs in production.</span>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding: 10px;">
-                        <papertitle><big>Designing Reliable LLM Pipelines with OpenAI Agents SDK</papertitle></big> <span style="font-size: 11px; color: #1772d0; font-weight: 600;">[COMING SOON]</span>
-                        <br>
-                        <span style="font-size: 13px; color: #555;">Practical guide on structured outputs, tool-calling reliability, agent handoffs, and guardrails based on production lessons from ConstructIQ&trade;.</span>
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <img src="images/blog_rag_production.svg" alt="" style="width:80px; flex-shrink:0; filter: grayscale(60%); opacity:0.5;">
+                            <div>
+                                <papertitle><big>Designing Reliable LLM Pipelines with OpenAI Agents SDK</big></papertitle> <span style="font-size: 11px; color: #1772d0; font-weight: 600;">[COMING SOON]</span>
+                                <br>
+                                <span style="font-size: 13px; color: #555;">Practical guide on structured outputs, tool-calling reliability, agent handoffs, and guardrails based on production lessons from ConstructIQ&trade;.</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 14px 10px 6px 10px;">
+                        <a href="blog/index.html" style="font-size: 13px;">View all writing &rarr;</a>
                     </td>
                 </tr>
             </tbody></table>
@@ -1166,6 +1165,11 @@
                 <tr>
                     <td style="padding: 14px;">
                         <p style="font-size: 12px; color: #aaa; margin-bottom: 18px;">From <a href="https://www.linkedin.com/in/rahul-yadav-704/details/recommendations/?detailScreenTabIndex=0" target="_blank">LinkedIn</a></p>
+
+                        <blockquote style="border-left: 3px solid #1772d0; padding: 8px 16px; margin: 0 0 20px 0; font-size: 13px; color: #444;">
+                            <p style="margin: 0 0 10px 0;"><i>"I had the opportunity to work with Rahul Yadav at Apex Analytics when I was serving as Chief Data Officer, and he stood out quickly. Rahul has a rare ability to bridge AI, data science, and real business impact. He quickly understood what we were trying to accomplish and translated that into practical, working solutions. About three years ago&mdash;well ahead of the curve&mdash;he led efforts around generative AI and LLMs within Apex. His work helped close the gap between emerging AI capabilities and real-world enterprise use cases. He's not just technically strong&mdash;he's thoughtful, curious, and takes real ownership of outcomes. I would highly recommend Rahul to any organization looking for someone who can connect advanced AI and data science to tangible results. I'd gladly work with him again."</i></p>
+                            <span style="font-size: 12px; color: #888;"><b>Chris Pardo</b>, Chief Data Officer (former), Apex Analytics &middot; Product | Partnerships | Data | Innovation &middot; <em>Senior leader, indirect</em></span>
+                        </blockquote>
 
                         <blockquote style="border-left: 3px solid #1772d0; padding: 8px 16px; margin: 0 0 20px 0; font-size: 13px; color: #444;">
                             <p style="margin: 0 0 10px 0;"><i>"Rahul was a student in my Technology Entrepreneurship course in the Spring of 2023. He performed at a high level and his development during the semester was significant. He provides in-depth analysis, iterates on solutions, and is able to explain his decisions well. Rahul also showed an aptitude for making connections between the subject matter of the course and real-world situations. He acknowledges the value of others' views and used empathy and personal experience to understand the needs of potential customers. He frames problems, analyzes situations, identifies key issues, and produces creative solutions at a high level. I am confident that Rahul has the necessary skills and knowledge to be a great asset in any team."</i></p>

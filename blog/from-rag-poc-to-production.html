@@ -1,0 +1,649 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <!-- TEMPLATE:HEAD - update <title>, <meta name="Description">, OG tags per post -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>From RAG POC to Production: What Actually Changes , Rahul Yadav</title>
+
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <meta name="author" content="Rahul Yadav">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="The gap between a working RAG demo and a system that survives real users , retrieval quality, hallucination control, observability, cost, and the human side of trust.">
+    <meta name="keywords" content="RAG production, retrieval augmented generation, LLM observability, hallucination control, GenAI, production AI, Rahul Yadav">
+
+    <meta property="og:title" content="From RAG POC to Production: What Actually Changes">
+    <meta property="og:description" content="The gap between a working RAG demo and a system that survives real users isn't a sprint. It's a different sport.">
+    <meta property="og:type" content="article">
+    <meta property="article:author" content="Rahul Yadav">
+
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <!-- /TEMPLATE:HEAD -->
+
+    <style>
+        /* === Article body typography === */
+        article p { margin: 0 0 16px 0; }
+        article h2 {
+            margin: 12px 0 14px 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #222;
+            display: block;
+        }
+        article h3 {
+            margin: 26px 0 10px 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1772d0;
+        }
+        article ul { margin: 0 0 16px 0; padding-left: 24px; }
+        article ul li { margin-bottom: 6px; }
+        article blockquote {
+            border-left: 3px solid #1772d0;
+            background: #f8fafc;
+            margin: 18px 0;
+            padding: 12px 18px;
+            font-style: italic;
+            color: #444;
+        }
+        article .meta {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        article code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: #c7254e;
+        }
+
+        /* === Hero header === */
+        article .hero { text-align:center; margin: 12px 0 32px 0; }
+        article .hero h1 {
+            font-size: 38px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 14px 0 10px;
+        }
+        article .hero .subtitle {
+            font-size: 18px;
+            font-style: italic;
+            color: #555;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        article .hero .hero-img {
+            width: 100%;
+            max-width: 980px;
+            height: auto;
+            margin: 28px auto 0;
+            display: block;
+            border: 1px solid #e8f0fb;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+        article .hero-rule {
+            width: 100%;
+            height: 2px;
+            background: #1772d0;
+            opacity: 0.7;
+            margin: 28px 0 8px;
+            border: 0;
+        }
+
+        /* === Pattern 6: section divider (replaces inline H2 underline) === */
+        article .section-rule {
+            width: 60px;
+            height: 3px;
+            background: #1772d0;
+            opacity: 0.7;
+            margin: 40px 0 12px;
+            border: 0;
+        }
+
+        /* === Pattern 1: inline diagram figure === */
+        article figure.diagram {
+            margin: 24px 0;
+            padding: 24px;
+            background: #f8fafc;
+            border: 1px solid #e8f0fb;
+            border-radius: 8px;
+        }
+        article figure.diagram svg,
+        article figure.diagram img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        article figure.diagram figcaption {
+            margin-top: 12px;
+            font-size: 13px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+
+        /* === Pattern 2: stat callout strip === */
+        article .stat-strip {
+            display: flex;
+            gap: 16px;
+            background: #e8f0fb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        article .stat-strip .stat { flex: 1; text-align: center; }
+        article .stat-strip .stat .num {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1772d0;
+            line-height: 1;
+        }
+        article .stat-strip .stat .lbl {
+            font-size: 13px;
+            color: #555;
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* === Pattern 3: pull quote === */
+        article .pull-quote {
+            font-size: 22px;
+            line-height: 1.4;
+            font-style: italic;
+            color: #1a1a1a;
+            margin: 32px 0;
+            padding: 8px 24px;
+            border-left: 4px solid #f09228;
+        }
+
+        /* === Pattern 4: comparison table === */
+        article table.compare {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+        article table.compare th {
+            background: #1772d0;
+            color: #fff;
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 700;
+        }
+        article table.compare td {
+            padding: 10px 14px;
+            border: 1px solid #e8f0fb;
+            vertical-align: top;
+        }
+        article table.compare tr:nth-child(even) td { background: #f8fafc; }
+
+        /* === Pattern 5: annotated checklist === */
+        article ul.annot-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 18px 0;
+        }
+        article ul.annot-list li {
+            position: relative;
+            padding-left: 26px;
+            margin-bottom: 14px;
+        }
+        article ul.annot-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: 12px;
+            height: 12px;
+            background: #f09228;
+            border-radius: 2px;
+        }
+        article ul.annot-list li strong {
+            display: block;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        /* === Tags + author card === */
+        article .tags {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #888;
+        }
+        article .tags span {
+            background: #f0f4fa;
+            color: #1772d0;
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-right: 6px;
+            font-size: 12px;
+        }
+        article .author-card {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        article .author-card img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        article .author-card .author-text {
+            flex: 1;
+            font-size: 14px;
+            color: #444;
+        }
+        article .author-card .author-text strong { color: #222; }
+
+        /* === Mobile responsive === */
+        @media (max-width: 720px) {
+            article .hero h1 { font-size: 28px; }
+            article .hero .subtitle { font-size: 16px; }
+            article .stat-strip { flex-direction: column; }
+            article table.compare { font-size: 13px; }
+            article figure.diagram { padding: 14px; }
+            article .pull-quote { font-size: 18px; padding: 6px 16px; }
+        }
+    </style>
+</head>
+<body class="bg_colour">
+
+<!--
+  ============================================================
+  POST TEMPLATE v1
+  To create a new post:
+    1. cp from-rag-poc-to-production.html new-post-slug.html
+    2. Replace TEMPLATE:HEAD metadata (title, description, OG tags).
+    3. Replace TEMPLATE:HERO (title, subtitle, hero SVG path).
+       Create /images/blog_<slug>_hero.svg at 1040x360.
+    4. Add/remove TEMPLATE:SECTION blocks for each H2.
+    5. Inside sections, drop TEMPLATE:VISUAL blocks using the 6 patterns.
+    6. Add the post entry to /blog/index.html.
+
+  Visual vocabulary:
+    diagram | stat-strip | pull-quote | compare | annot-list | section-rule
+
+  Palette:
+    #1772d0 primary | #f09228 accent | #e8f0fb panel | #f8fafc bg
+  ============================================================
+-->
+
+    <table border=0 class="bg_colour" style="width:92%;max-width:1100px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+        <tr style="padding:0px">
+            <td style="padding:0px">
+
+                <!-- Top nav -->
+                <table border=0 class="bg_colour" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+                    <tr>
+                        <td style="padding: 2.5% 2.5% 0 2.5%;">
+                            <p style="margin: 0; font-size: 12px; color: #888; letter-spacing: 0.04em; text-transform: uppercase;">
+                                <a href="index.html" style="color:#888;">&larr; All writing</a>
+                                &nbsp;&middot;&nbsp;
+                                <a href="../index.html" style="color:#888;">Portfolio</a>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+                <article style="padding: 24px 2.5% 40px 2.5%;">
+
+                    <!-- TEMPLATE:HERO - eyebrow meta / H1 / subtitle / hero SVG -->
+                    <div class="hero">
+                        <p class="meta">May 2026 &middot; 12 min read &middot; By Rahul Yadav</p>
+                        <h1>From RAG POC to Production: What Actually Changes</h1>
+                        <p class="subtitle">The gap between a working RAG demo and a system that survives real users isn't a sprint. It's a different sport.</p>
+                        <img class="hero-img" src="../images/blog_rag_prod_hero.svg" alt="POC vs production RAG pipeline comparison">
+                        <hr class="hero-rule">
+                    </div>
+                    <!-- /TEMPLATE:HERO -->
+
+                    <!-- TEMPLATE:SECTION name="poc-that-lied" -->
+                    <hr class="section-rule">
+                    <h2>The POC That Lied to You</h2>
+
+                    <p>You've been there. A stakeholder asks if AI can answer questions over the company knowledge base. You spin up a notebook, pull in LangChain or LlamaIndex, point it at a folder of PDFs, wire up OpenAI, and within an afternoon you have a chatbot that answers questions over your documents. The demo lands. People are impressed. Someone says the word "production."</p>
+
+                    <p>That's where the trouble begins.</p>
+
+                    <p>I've taken RAG systems from notebooks into production at three different companies now , a contract analyzer at Hilabs, a knowledge-specific chatbot at Apexanalytix, and most recently the document intelligence layer of ConstructIQ&trade; at Oracle. Every single time, the gap between the demo and the system that actually survived real users was bigger than I expected.</p>
+
+                    <p>This post is what I wish someone had handed me before my first production rollout. Five things change when RAG meets reality: <strong>retrieval quality, hallucination control, observability, cost, and the human side of trust.</strong> Get these wrong and your beautiful demo becomes the system everyone quietly stops using.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="compare" -->
+                    <table class="compare">
+                        <thead>
+                            <tr>
+                                <th style="width:24%;">Concern</th>
+                                <th style="width:38%;">In the POC</th>
+                                <th style="width:38%;">In Production</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Retrieval</strong></td>
+                                <td>Top-k vector search, default chunking</td>
+                                <td>Hybrid BM25 + vector, parent-child indexing, reranking, query rewriting</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hallucination</strong></td>
+                                <td>"Looks fine to me"</td>
+                                <td>Forced citations, faithfulness scoring, "I don't know" as a first-class output</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Observability</strong></td>
+                                <td>Print statements</td>
+                                <td>Per-request traces with retrieved chunks, scores, tokens, latency, user feedback</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cost</strong></td>
+                                <td>Rounding error on the OpenAI bill</td>
+                                <td>Tiered models, semantic cache, incremental embedding refresh, context budgeting</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trust</strong></td>
+                                <td>"Try it out!"</td>
+                                <td>Citations UI, feedback loops, tiered routing for the long tail of hard queries</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /TEMPLATE:VISUAL -->
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:SECTION name="retrieval-quality" -->
+                    <hr class="section-rule">
+                    <h2>1. Retrieval Quality: The 80% That No One Talks About</h2>
+
+                    <p>In the demo, you ask "what is our refund policy?" and the system returns the refund policy section. Magic.</p>
+
+                    <p>In production, users ask things like:</p>
+                    <ul>
+                        <li><em>"can i get my money back if i bought it last tuesday and the box was damaged"</em></li>
+                        <li><em>"refund window?"</em></li>
+                        <li><em>"what's the SLA on returns for B2B clients in EU markets?"</em></li>
+                    </ul>
+
+                    <p>Suddenly your top-k retrieval is pulling chunks about shipping policies, terms of service, and a 2018 marketing email about holiday returns. The LLM, dutifully grounded in the wrong context, hallucinates a confident answer.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="pull-quote" -->
+                    <p class="pull-quote">In production RAG, retrieval quality is 80% of the system. The LLM is the smaller problem.</p>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <p>What changes in production:</p>
+
+                    <h3>Chunking is no longer "1000 tokens with 200 overlap"</h3>
+                    <p>That naive default works for the demo because the demo questions are kind. In production, you need chunking that respects document structure. For a contract, that means clause-level chunking with metadata about parent agreement, section type, and effective dates. For a knowledge base, parent-child indexing , where small chunks are retrieved but the parent context is passed to the LLM , made a measurable difference for me. Retrieval precision went up because small chunks have tighter semantics; generation quality went up because the LLM saw enough surrounding context to reason.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="diagram" -->
+                    <figure class="diagram">
+                        <img src="../images/blog_rag_prod_parent_child.svg" alt="Parent-child indexing diagram">
+                        <figcaption>Parent-child indexing: retrieve small chunks for precision, expand to the parent for the LLM's context.</figcaption>
+                    </figure>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <h3>Pure vector search is not enough</h3>
+                    <p>Embeddings are great at semantic similarity but terrible at exact matches , product SKUs, error codes, account numbers, contract reference IDs. Hybrid retrieval (BM25 + vector, fused with reciprocal rank fusion) is now my default. On the contract analyzer at Hilabs, switching from pure vector to hybrid lifted exact-match accuracy on entity-grounded queries from "frustrating" to "shippable."</p>
+
+                    <h3>Reranking is the cheap win nobody uses</h3>
+                    <p>Most teams retrieve top-20 and pass them all to the LLM. Bad idea , noise pollutes generation, costs balloon, latency spikes. Retrieve top-50, rerank with a cross-encoder (Cohere Rerank, BGE Rerank, or your own fine-tuned), and pass top-5 to the LLM. On my offers search engine, reranking delivered an accuracy gain <em>and</em> a latency reduction simultaneously, because we stopped sending bloat to a slow model.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="stat-strip" -->
+                    <div class="stat-strip">
+                        <div class="stat">
+                            <div class="num">+40%</div>
+                            <span class="lbl">accuracy gain from reranking</span>
+                        </div>
+                        <div class="stat">
+                            <div class="num">&minus;70%</div>
+                            <span class="lbl">end-to-end latency reduction</span>
+                        </div>
+                    </div>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <h3>Query rewriting is doing real work</h3>
+                    <p>Users write terrible queries. Single-word searches. Pronouns referring to nothing. Multi-intent compound questions. A small upstream LLM call to expand, decompose, or rewrite the query before retrieval typically pays for itself many times over in retrieval quality. Yes, it adds latency. No, you can't skip it.</p>
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:SECTION name="hallucination-control" -->
+                    <hr class="section-rule">
+                    <h2>2. Hallucination Control: Grounding Is Not a Switch</h2>
+
+                    <p>The demo answers were correct because you asked the demo questions. In production, users will ask things your knowledge base doesn't contain , and your system will confidently make up an answer that sounds exactly like the real ones. This is the failure mode that destroys trust.</p>
+
+                    <p>A few defenses I now consider non-negotiable:</p>
+
+                    <h3>"I don't know" must be a first-class output</h3>
+                    <p>Your prompt needs to explicitly authorize and structure the "no answer" response. The LLM must be told that returning "the documents don't contain this information" is preferable to guessing. This sounds obvious. It is shocking how often production systems are built without it.</p>
+
+                    <h3>Citations are a forcing function</h3>
+                    <p>Require the LLM to cite the chunk ID for every claim. This does two things. First, it gives users a way to verify. Second, and more importantly, it makes hallucination harder , the model has to commit to a specific source, which constrains generation toward retrieved content.</p>
+
+                    <h3>Faithfulness checks at inference time</h3>
+                    <p>A second LLM call (or a smaller dedicated model) that scores whether the generated answer is supported by the retrieved chunks. Phoenix and LangSmith both ship this out of the box. When the faithfulness score drops below threshold, fall back to "I don't know" or escalate to a different retrieval strategy. This is a real-time guardrail, not a quality dashboard.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="diagram" -->
+                    <figure class="diagram">
+                        <img src="../images/blog_rag_prod_faithfulness.svg" alt="Inference-time faithfulness check loop">
+                        <figcaption>Faithfulness as a real-time guardrail: pass &rarr; ship; fail &rarr; "I don't know" or re-retrieve.</figcaption>
+                    </figure>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <h3>LLM-as-judge for offline regression</h3>
+                    <p>Build an evaluation set of 200 to 500 real production queries with ground-truth answers. Run it nightly. When you change the chunking strategy, the embedding model, or the prompt, you'll see immediately whether quality regressed. I've watched teams ship a "small prompt tweak" and silently lose 8% on faithfulness because nobody had a regression suite. Don't be that team.</p>
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:SECTION name="observability" -->
+                    <hr class="section-rule">
+                    <h2>3. Observability: You Cannot Improve What You Cannot See</h2>
+
+                    <p>The demo had print statements. Production needs an observability stack on day one , not month six.</p>
+
+                    <p>What you actually need to log, per request:</p>
+
+                    <!-- TEMPLATE:VISUAL kind="annot-list" -->
+                    <ul class="annot-list">
+                        <li><strong>The raw query</strong>What the user actually typed, verbatim.</li>
+                        <li><strong>The rewritten/expanded query</strong>What your system actually searched for after preprocessing.</li>
+                        <li><strong>The retrieved chunks</strong>IDs, scores, source documents.</li>
+                        <li><strong>The reranker scores</strong>Before vs. after reranking, so you can tell when the reranker is helping.</li>
+                        <li><strong>The final prompt sent to the LLM</strong>Including any system prompt, few-shot examples, and the assembled context.</li>
+                        <li><strong>The raw LLM response</strong>Pre any post-processing, exactly as the model returned it.</li>
+                        <li><strong>Latency at each stage</strong>So you know which stage to optimize when latency budgets get tight.</li>
+                        <li><strong>Token counts and cost</strong>Per stage and per request, so cost regressions are visible immediately.</li>
+                        <li><strong>User feedback</strong>Thumbs up/down at minimum, free-text reasons when offered.</li>
+                    </ul>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <p>LangSmith and Arize Phoenix have made this dramatically easier than it was 18 months ago. Use them. The day a user reports "the chatbot gave a weird answer," you will be able to pull up the exact trace, see what was retrieved, see what was sent to the LLM, and diagnose the failure in minutes instead of guessing for days.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="diagram" -->
+                    <figure class="diagram">
+                        <img src="../images/blog_rag_prod_trace.svg" alt="Per-request trace with stage latency and token counts">
+                        <figcaption>A single request, every stage instrumented. The LLM call dominates both latency and cost , the trace makes that obvious.</figcaption>
+                    </figure>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <p>The observability investment pays compound interest. Once you can see every request, you can:</p>
+                    <ul>
+                        <li>Cluster failed queries to find systemic gaps in your knowledge base</li>
+                        <li>Identify which document sources cause the most hallucinations</li>
+                        <li>Spot prompt drift when a model upgrade silently changes behavior</li>
+                        <li>Build a feedback loop where thumbs-down responses become your next eval set</li>
+                    </ul>
+
+                    <p>This single discipline separates "RAG project that died after launch" from "RAG product that compounds."</p>
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:SECTION name="cost" -->
+                    <hr class="section-rule">
+                    <h2>4. Cost: The Bill Is Not What You Modeled</h2>
+
+                    <p>In the demo, you ran 50 queries during testing and the OpenAI bill was rounding error. In production, the same system serves 50,000 queries a day, each one with reranking, query rewriting, faithfulness checking, and a 4K-token context window. Suddenly you're staring at a five-figure monthly bill and your CFO has questions.</p>
+
+                    <p>Where the cost actually goes:</p>
+
+                    <h3>Context window inflation</h3>
+                    <p>Every chunk you stuff into the prompt costs tokens twice , once on input, once influencing output length. Most teams send too much context out of fear of missing something. Rerank harder, send less. Halving the context window typically does not measurably hurt answer quality but reliably halves your generation cost.</p>
+
+                    <h3>Embedding refresh</h3>
+                    <p>Whenever a document changes, you re-embed it. If you re-embed your entire corpus on every minor edit, you're burning money. Build incremental indexing , hash-based change detection, document-version-aware embeddings, dirty-only refresh. This is unglamorous infrastructure work that has saved me five-figure annual costs at multiple companies.</p>
+
+                    <h3>Model selection per task</h3>
+                    <p>Not every step needs GPT-4. Query rewriting? GPT-4o-mini or Claude Haiku is plenty. Reranking? A dedicated cross-encoder is 100x cheaper than asking GPT-4 to rerank. Final answer generation on a high-stakes query? Use the big model. The pattern is "tier the model to the task." A multi-model RAG pipeline is typically half the cost of a "GPT-4 for everything" pipeline at the same quality.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="compare" -->
+                    <table class="compare">
+                        <thead>
+                            <tr>
+                                <th style="width:34%;">Stage</th>
+                                <th style="width:33%;">Naive (GPT-4 everywhere)</th>
+                                <th style="width:33%;">Tiered (right-sized model)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Query rewriting</strong></td>
+                                <td>GPT-4 Turbo</td>
+                                <td>GPT-4o-mini / Claude Haiku</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reranking</strong></td>
+                                <td>GPT-4 as judge</td>
+                                <td>Cross-encoder (~100&times; cheaper)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Faithfulness check</strong></td>
+                                <td>GPT-4 evaluator</td>
+                                <td>Small dedicated scorer</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Final answer</strong></td>
+                                <td>GPT-4 Turbo</td>
+                                <td>GPT-4 Turbo (high-stakes)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cache lookup</strong></td>
+                                <td>Skipped</td>
+                                <td>Semantic cache (30&ndash;50% hit rate)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total per query</strong></td>
+                                <td>1.0&times; (baseline)</td>
+                                <td><strong>~0.5&times;</strong> at equivalent quality</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <h3>Caching that actually works</h3>
+                    <p>Semantic caching , where similar queries reuse cached responses , can cut traffic to the LLM by 30 to 50% on systems with repetitive query patterns (which is most enterprise systems). The implementation is fiddly because you have to balance cache hit rate against staleness, but the ROI is enormous.</p>
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:SECTION name="human-side" -->
+                    <hr class="section-rule">
+                    <h2>5. The Human Side: Trust, Onboarding, and the Long Tail</h2>
+
+                    <p>This last category is the one engineers consistently underestimate. A RAG system is only useful if humans actually use it. Adoption is a product problem, not a model problem.</p>
+
+                    <h3>The first wrong answer matters more than the next ten right ones</h3>
+                    <p>Users build a mental model of the system based on early interactions. Get those wrong and they will permanently distrust the tool, even after you fix the underlying issue. This is why I now invest disproportionately in the first weeks of rollout , tight feedback loops, fast iteration, sometimes even human-in-the-loop review for the first 1,000 production answers. Frontload trust.</p>
+
+                    <h3>Show your work</h3>
+                    <p>Citations, snippet previews, "this answer is based on these 3 documents" UI patterns , these aren't decorative. They tell the user "this system is grounded, not guessing" and they give the user agency to verify. Every production RAG system I've shipped has converged on the same UX shape: answer at the top, sources below, with confidence indicators when appropriate.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="diagram" -->
+                    <figure class="diagram">
+                        <img src="../images/blog_rag_prod_chat_ui.svg" alt="Chat UI mockup with answer, citations, and feedback controls">
+                        <figcaption>The UX shape every production RAG converges on: grounded answer, verifiable sources, one-click feedback.</figcaption>
+                    </figure>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <h3>Build the feedback loop into the product, not the analytics dashboard</h3>
+                    <p>Thumbs up/thumbs down with a free-text "what was wrong?" field, surfaced inside the chat interface, is the cheapest evaluation system you'll ever build. The data quality is dramatically higher than anything you'll get from periodic user surveys, and it gives the user a sense that the system is improving , which itself drives adoption.</p>
+
+                    <h3>Plan for the long tail</h3>
+                    <p>In every production RAG system I've worked on, 60 to 80% of queries are covered by maybe 100 question patterns. The remaining 20 to 40% is a heavy tail of unique, often hard, often unanswerable queries. Don't try to solve the tail with the same pipeline that handles the head. Route the head queries through fast, cheap, well-tuned paths. Route the tail through more expensive, more careful paths , or escalate to a human. A tiered RAG system with smart routing typically beats a "one pipeline for everything" system on both quality and cost.</p>
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:VISUAL kind="pull-quote" -->
+                    <p class="pull-quote">The actual code from a POC to a production RAG system is maybe 30% different. The mindset is 100% different.</p>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <!-- TEMPLATE:SECTION name="closing" -->
+                    <hr class="section-rule">
+                    <h2>What I Tell Engineers Now</h2>
+
+                    <p>When someone shows me a working RAG demo and asks how to take it to production, I ask three questions before anything else:</p>
+
+                    <!-- TEMPLATE:VISUAL kind="annot-list" -->
+                    <ul class="annot-list">
+                        <li><strong>What does failure look like?</strong>Not "the answer is wrong" , specifically. Wrong by hallucination? Wrong by retrieval miss? Wrong by stale data? Each failure mode has a different fix.</li>
+                        <li><strong>How will you know if quality regresses?</strong>If the answer is "users will tell us," the project is in trouble before it starts.</li>
+                        <li><strong>What is the per-query budget?</strong>Cost per query, latency per query, error budget. If you can't name these, you're not building a product , you're prototyping forever.</li>
+                    </ul>
+                    <!-- /TEMPLATE:VISUAL -->
+
+                    <p>The POC asks "can the model do this?" Production asks "what happens when 10,000 users hit it tomorrow?" Most of the engineering effort goes into the gap between those two questions.</p>
+
+                    <p>If you're standing in front of a working demo wondering what to do next , start with retrieval quality, build observability before you need it, plan for hallucinations as a first-class concern not an edge case, model your costs honestly, and invest in trust from day one.</p>
+
+                    <!-- TEMPLATE:VISUAL kind="pull-quote" -->
+                    <p class="pull-quote">The demo is the easy part. The system that survives real users , that's the work.</p>
+                    <!-- /TEMPLATE:VISUAL -->
+                    <!-- /TEMPLATE:SECTION -->
+
+                    <!-- TEMPLATE:FOOTER - tags / author card; usually unchanged -->
+                    <div class="tags">
+                        <span>RAG</span>
+                        <span>LLMs</span>
+                        <span>Production AI</span>
+                        <span>AI Engineering</span>
+                        <span>GenAI</span>
+                    </div>
+
+                    <div class="author-card">
+                        <img src="../images/profilepic.jpg" alt="Rahul Yadav">
+                        <div class="author-text">
+                            <p style="margin: 0 0 4px 0;"><strong>Rahul Yadav</strong></p>
+                            <p style="margin: 0; font-size: 13px; color: #555;">Senior AI/ML Engineer at Oracle. I write about production AI, multi-agent systems, and the gap between research and reality. <a href="../index.html">Portfolio</a> &middot; <a href="https://www.linkedin.com/in/rahul-yadav-704/" target="_blank">LinkedIn</a> &middot; <a href="mailto:rahulzyadav87@gmail.com">Email</a></p>
+                        </div>
+                    </div>
+                    <!-- /TEMPLATE:FOOTER -->
+
+                </article>
+
+                <hr class="soft">
+
+                <!-- Footer -->
+                <table border=0 class="bg_colour" style="padding:20px;width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+                    <tr>
+                        <td style="text-align: center; padding: 8px 16px; font-size: 12px; color: #999;">
+                            <a href="index.html">All writing</a> &middot;
+                            <a href="../index.html">Portfolio</a> &middot;
+                            <a href="https://github.com/rahulyad011" target="_blank">GitHub</a> &middot;
+                            <a href="https://www.linkedin.com/in/rahul-yadav-704/" target="_blank">LinkedIn</a>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody></table>
+</body>
+</html>
